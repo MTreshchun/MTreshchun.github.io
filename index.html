@@ -859,13 +859,14 @@
 @keyframes mfbob{0%,100%{translate:0 0;}50%{translate:0 -7px;}}
 @keyframes rvin{from{opacity:0;translate:var(--rx,0px) var(--ry,28px);scale:var(--rs,1);}to{opacity:1;translate:0 0;scale:1;}}
 @media (max-width:820px){
-  .mfl{display:flex;flex-wrap:wrap;justify-content:center;gap:16px 18px;max-width:300px;margin:0 auto;padding:36px 0 4px;position:relative;z-index:2;}
-  .mf{width:54px;height:54px;border-radius:50%;background:var(--paper);box-shadow:0 10px 26px rgba(22,53,42,.12),0 0 0 1px rgba(22,53,42,.05);display:grid;place-items:center;animation:mfbob calc(4.4s + var(--i) * .35s) ease-in-out infinite;animation-delay:calc(var(--i) * -.7s);}
-  .mf:nth-child(even){margin-top:14px;}
+  .mfl{display:block;position:absolute;left:0;right:0;top:0;height:236px;z-index:2;pointer-events:none;}
+  .mf{position:absolute;left:calc(var(--x) * 1% - var(--s) * .5px);top:calc(var(--y) * 1px);width:calc(var(--s) * 1px);height:calc(var(--s) * 1px);border-radius:50%;background:var(--paper);box-shadow:0 10px 26px rgba(22,53,42,.12),0 0 0 1px rgba(22,53,42,.05);display:grid;place-items:center;animation:mfbob calc(4.4s + var(--i) * .35s) ease-in-out infinite;animation-delay:calc(var(--i) * -.7s);}
   .mf .mk{width:100%;height:100%;border-radius:50%;overflow:hidden;}
   .mf .mono{font-size:20px;}
+  .x1-center{padding-top:248px;}
   .stage.soon .big{font-size:clamp(32px,9vw,40px);}
   .contact{padding-bottom:48px;}
+  .contact::before{top:-260px;-webkit-mask-image:linear-gradient(transparent 0%,rgba(0,0,0,.18) 30%,#000 78%);mask-image:linear-gradient(transparent 0%,rgba(0,0,0,.18) 30%,#000 78%);}
   .btn:active,.nav-cta:active,.theme-btn:active,.bdbtn:active,.xbtn:active{transform:scale(.95);}
   .reveal.rv{animation:none;}
   .rv-on .rv{opacity:0;}
@@ -905,8 +906,7 @@
 
 <main>
 <div class="hero-band" data-hx="1">
-  <div class="mfl" aria-hidden="true"></div>
-  <div class="hx hx1 v1 v5" data-x="1"><div class="x1-field xf" data-kind="dot" aria-hidden="true"></div><div class="wrap x1-center"><h1 data-sel>Research-driven design.<br>Accessible, honest, and built together.</h1><p class="ab" data-sel>I'm a Senior Product Designer with 9+ years of experience improving live products through data, research and continuous learning. I care about accessible, honest design, and about the people I build it with, because a good team makes great products.</p></div></div>
+  <div class="hx hx1 v1 v5" data-x="1"><div class="x1-field xf" data-kind="dot" aria-hidden="true"></div><div class="mfl" aria-hidden="true"></div><div class="wrap x1-center"><h1 data-sel>Research-driven design.<br>Accessible, honest, and built together.</h1><p class="ab" data-sel>I'm a Senior Product Designer with 9+ years of experience improving live products through data, research and continuous learning. I care about accessible, honest design, and about the people I build it with, because a good team makes great products.</p></div></div>
   <div class="wrap"><div class="tools-m" aria-label="Tools I work with"></div></div>
 </div>
 
@@ -1443,14 +1443,21 @@
   /* mobile: floating icons, reveals, CV guard */
   (function(){
     var mfl = document.querySelector('.mfl');
-    if (mfl) TOOLS.forEach(function(t, i){ var d = el('span', 'mf'); d.setAttribute('data-name', t[1]); d.style.setProperty('--i', i); d.appendChild(mkLogo(t)); mfl.appendChild(d); });
+    var LAY = {
+      a: [[14,34,56],[38,12,46],[66,26,50],[88,62,48],[10,122,48],[31,176,52],[74,150,46],[56,196,50]],
+      b: [[9,150,48],[21,98,50],[34,56,52],[46,34,54],[58,34,54],[70,56,52],[82,98,50],[93,150,48]],
+      c: [[12,24,54],[31,74,48],[12,124,50],[29,176,46],[88,24,54],[69,74,48],[88,124,50],[71,176,46]]
+    };
+    var qm = (location.search.match(/mfl=([abc])/) || [])[1] || 'c', L = LAY[qm];
+    var ORD = ['Figma', 'Notion', 'Bitbucket', 'Jira', 'Claude', 'FullStory', 'UserTesting', 'Confluence'];
+    if (mfl) ORD.forEach(function(nm, i){ var t = TOOLS.filter(function(x){ return x[1] === nm; })[0]; var d = el('span', 'mf'); d.setAttribute('data-name', nm); d.style.setProperty('--i', i); d.style.setProperty('--x', L[i][0]); d.style.setProperty('--y', L[i][1]); d.style.setProperty('--s', L[i][2]); d.appendChild(mkLogo(t)); mfl.appendChild(d); });
     var cv = document.getElementById('cvbtn');
     if (cv && /github\.io$/.test(location.hostname) && window.fetch) { fetch(cv.getAttribute('href'), { method: 'HEAD' }).then(function(r){ if (!r.ok) cv.hidden = true; }).catch(function(){}); }
     var mq = window.matchMedia('(max-width:820px)'), rm = window.matchMedia('(prefers-reduced-motion:reduce)');
     if (!mq.matches || rm.matches || !('IntersectionObserver' in window)) return;
     var groups = [];
     function g(list, o){ o = o || {}; var arr = Array.prototype.slice.call(list); arr.forEach(function(e, i){ e.classList.add('rv'); if (o.l) e.classList.add('l'); if (o.pop) e.classList.add('pop'); e.style.setProperty('--rvd', (i * (o.step || 0.1)) + 's'); }); }
-    document.querySelectorAll('.exp-row').forEach(function(e){ g([e], { l: true }); });
+    document.querySelectorAll('.exp-row').forEach(function(e){ g([e]); });
     g(document.querySelectorAll('.stage.soon .cen-in > h2, .stage.soon .cen-in > p, .stage.soon .postit'), { step: 0.14 });
     g(document.querySelectorAll('.edu > *, .edu .courses li'), { step: 0.08 });
     var lg = document.querySelectorAll('.two > div:last-child > .section-label, .langs li'); g(lg, { step: 0.09 });
