@@ -897,6 +897,13 @@
   .x1-field .fi.dragging{cursor:grabbing;animation-play-state:paused;z-index:6;filter:drop-shadow(0 16px 18px rgba(22,53,42,.22));}
   .fsel.nolabel,.fsel.nolabel.glide{transition:opacity .18s!important;}
 }
+
+.reveal.rv{animation:none;}
+.rv-on .rv{opacity:0;}
+.rv-on .rv.in{animation:rvin .85s var(--ease) both;animation-delay:var(--rvd,0s);}
+.rv.l{--rx:-44px;--ry:0px;}
+.rv.pop{--rx:0px;--ry:14px;--rs:.55;}
+[data-anim] .a-t.rv.in,[data-anim] .a-l.rv.in{animation:rvin .85s var(--ease) both!important;animation-delay:var(--rvd,0s)!important;}
 </style>
 
 <a class="skip" href="#experience">Skip to content</a>
@@ -1463,7 +1470,7 @@
     var cv = document.getElementById('cvbtn');
     if (cv && /github\.io$/.test(location.hostname) && window.fetch) { fetch(cv.getAttribute('href'), { method: 'HEAD' }).then(function(r){ if (!r.ok) cv.hidden = true; }).catch(function(){}); }
     var mq = window.matchMedia('(max-width:820px)'), rm = window.matchMedia('(prefers-reduced-motion:reduce)');
-    if (!mq.matches || rm.matches || !('IntersectionObserver' in window)) return;
+    if (rm.matches || !('IntersectionObserver' in window)) return;
     var groups = [];
     function g(list, o){ o = o || {}; var arr = Array.prototype.slice.call(list); arr.forEach(function(e, i){ e.classList.add('rv'); if (o.l) e.classList.add('l'); if (o.pop) e.classList.add('pop'); e.style.setProperty('--rvd', (i * (o.step || 0.1)) + 's'); }); }
     document.querySelectorAll('.exp-row').forEach(function(e){ g([e]); });
