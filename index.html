@@ -863,7 +863,7 @@
   .mf{position:absolute;left:calc(var(--x) * 1% - var(--s) * .5px);top:var(--t,auto);bottom:var(--bt,auto);width:calc(var(--s) * 1px);height:calc(var(--s) * 1px);border-radius:50%;background:var(--paper);box-shadow:0 10px 26px rgba(22,53,42,.12),0 0 0 1px rgba(22,53,42,.05);display:grid;place-items:center;animation:mfbob calc(4.4s + var(--i) * .35s) ease-in-out infinite;animation-delay:calc(var(--i) * -.7s);}
   .mf .mk{width:100%;height:100%;border-radius:50%;overflow:hidden;}
   .mf .mono{font-size:20px;}
-  .x1-center{padding-top:190px;padding-bottom:190px;}
+  .x1-center{padding-top:136px;padding-bottom:136px;}
   .v5::before{-webkit-mask-image:linear-gradient(#000 0%,#000 80%,transparent 100%);mask-image:linear-gradient(#000 0%,#000 80%,transparent 100%);}
   .stage.soon .big{font-size:clamp(32px,9vw,40px);}
   .contact{padding-bottom:48px;}
@@ -890,14 +890,10 @@
 /* draggable hero icons (desktop) */
 @media (hover:hover) and (pointer:fine) and (min-width:821px){
   .x1-field .fi{cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none;}
+  .x1-field .fi.puck{animation-play-state:paused;}
   .x1-field .fi.dragging{cursor:grabbing;animation-play-state:paused;z-index:6;filter:drop-shadow(0 16px 18px rgba(22,53,42,.22));}
-  html.drag-on .fsel,html.drag-on .fsel.glide{transition:opacity .18s!important;}
-  .dragmode{position:absolute;right:24px;bottom:20px;z-index:6;display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-soft);}
-  .dragmode span{letter-spacing:.06em;text-transform:uppercase;margin-right:4px;}
-  .dragmode button{border:none;background:var(--paper-alt);color:var(--ink-soft);border-radius:6px;padding:6px 10px;font:inherit;font-weight:500;cursor:pointer;}
-  .dragmode button[aria-pressed="true"]{background:var(--ink);color:var(--paper);}
+  .fsel.nolabel,.fsel.nolabel.glide{transition:opacity .18s!important;}
 }
-@media not all and (hover:hover) and (pointer:fine) and (min-width:821px){.dragmode{display:none;}}
 </style>
 
 <a class="skip" href="#experience">Skip to content</a>
@@ -1478,41 +1474,40 @@
     document.querySelectorAll('.rv').forEach(function(e){ io.observe(e); });
   })();
 
-  /* draggable hero icons with soft physics (desktop) */
+  /* draggable hero icons: ice-hockey physics (desktop) */
   (function(){
     var field = document.querySelector('.hx1 .x1-field'); if (!field) return;
     var els = Array.prototype.slice.call(field.querySelectorAll('.fi')); if (!els.length) return;
-    var desk = window.matchMedia('(hover:hover) and (pointer:fine) and (min-width:821px)');
-    if (!desk.matches) return;
+    if (!window.matchMedia('(hover:hover) and (pointer:fine) and (min-width:821px)').matches) return;
     window.__noPar = true;
-    var mode = (location.search.match(/drag=(back|stay)/) || [])[1] || 'back';
-    var bodies = [], raf = 0, lastT = 0, drag = null;
+    var bodies = [], raf = 0, lastT = 0, drag = null, ptr = null;
+    var FRICTION = 0.982, WALL = 0.93, REST = 0.95, STOP = 0.05;
     function measure(){
-      els.forEach(function(el){ el.style.left = ''; el.style.top = ''; el.style.setProperty('--px', '0px'); el.style.setProperty('--py', '0px'); });
+      els.forEach(function(el){ el.style.left = ''; el.style.top = ''; el.style.setProperty('--px', '0px'); el.style.setProperty('--py', '0px'); el.classList.remove('puck'); });
       bodies = els.map(function(el){ var cs = getComputedStyle(el), x = parseFloat(cs.left), y = parseFloat(cs.top), w = el.offsetWidth, h = el.offsetHeight;
-        return { el: el, hx: x, hy: y, x: x, y: y, vx: 0, vy: 0, r: (w + h) / 4 + 2, drag: false }; });
+        return { el: el, x: x, y: y, vx: 0, vy: 0, r: (w + h) / 4 + 2, drag: false }; });
     }
     measure();
-    function cfg(){ return mode === 'back' ? { k: 0.012, damp: 0.9, rest: 0.55, wall: 0.5 } : { k: 0, damp: 0.945, rest: 0.85, wall: 0.78 }; }
+    function bounds(b){ return { x0: b.r, x1: field.clientWidth - b.r, y0: b.r, y1: field.clientHeight - b.r - 22 }; }
     function clampBody(b){
-      var W = field.clientWidth, H = field.clientHeight, w = b.r, bot = b.r + 22;
-      if (b.x < w) { b.x = w; if (!b.drag) b.vx = Math.abs(b.vx) * cfg().wall; }
-      if (b.x > W - w) { b.x = W - w; if (!b.drag) b.vx = -Math.abs(b.vx) * cfg().wall; }
-      if (b.y < w) { b.y = w; if (!b.drag) b.vy = Math.abs(b.vy) * cfg().wall; }
-      if (b.y > H - bot) { b.y = H - bot; if (!b.drag) b.vy = -Math.abs(b.vy) * cfg().wall; }
+      var k = bounds(b);
+      if (b.x < k.x0) { b.x = k.x0; if (!b.drag) b.vx = Math.abs(b.vx) * WALL; }
+      if (b.x > k.x1) { b.x = k.x1; if (!b.drag) b.vx = -Math.abs(b.vx) * WALL; }
+      if (b.y < k.y0) { b.y = k.y0; if (!b.drag) b.vy = Math.abs(b.vy) * WALL; }
+      if (b.y > k.y1) { b.y = k.y1; if (!b.drag) b.vy = -Math.abs(b.vy) * WALL; }
     }
     function step(dt){
-      var c = cfg(), moving = false, i, j, a, b;
+      var moving = false, i, j, a, b, it;
       bodies.forEach(function(q){
         if (q.drag) return;
-        if (c.k) { q.vx += (q.hx - q.x) * c.k * dt; q.vy += (q.hy - q.y) * c.k * dt; }
-        var f = Math.pow(c.damp, dt); q.vx *= f; q.vy *= f;
+        var f = Math.pow(FRICTION, dt); q.vx *= f; q.vy *= f;
+        if (Math.abs(q.vx) + Math.abs(q.vy) < STOP) { q.vx = q.vy = 0; }
         q.x += q.vx * dt; q.y += q.vy * dt;
       });
-      for (var it = 0; it < 3; it++) {
+      for (it = 0; it < 4; it++) {
         for (i = 0; i < bodies.length; i++) for (j = i + 1; j < bodies.length; j++) {
           a = bodies[i]; b = bodies[j];
-          var dx = b.x - a.x, dy = b.y - a.y, d = Math.sqrt(dx * dx + dy * dy), min = a.r + b.r + 4;
+          var dx = b.x - a.x, dy = b.y - a.y, d = Math.sqrt(dx * dx + dy * dy), min = a.r + b.r + 2;
           if (d >= min) continue;
           if (d < 0.01) { dx = 1; dy = 0; d = 1; }
           var nx = dx / d, ny = dy / d, ov = min - d;
@@ -1520,63 +1515,67 @@
           if (a.drag || b.drag) {
             var m = a.drag ? a : b, o = a.drag ? b : a, sg = a.drag ? 1 : -1;
             o.x += nx * ov * sg; o.y += ny * ov * sg;
-            var vn = (m.vx * nx + m.vy * ny) * sg; if (vn > 0) { o.vx += nx * sg * vn * 0.9; o.vy += ny * sg * vn * 0.9; }
+            var rvn = ((o.vx - m.vx) * nx + (o.vy - m.vy) * ny) * sg;
+            if (rvn < 0) { var imp = -(1 + REST) * rvn; o.vx += nx * sg * imp; o.vy += ny * sg * imp; }
+            o.el.classList.add('puck');
           } else {
             a.x -= nx * ov / 2; a.y -= ny * ov / 2; b.x += nx * ov / 2; b.y += ny * ov / 2;
             var rv = (b.vx - a.vx) * nx + (b.vy - a.vy) * ny;
-            if (rv < 0) { var jj = -(1 + c.rest) * rv / 2; a.vx -= jj * nx; a.vy -= jj * ny; b.vx += jj * nx; b.vy += jj * ny; }
+            if (rv < 0) { var jj = -(1 + REST) * rv / 2; a.vx -= jj * nx; a.vy -= jj * ny; b.vx += jj * nx; b.vy += jj * ny; a.el.classList.add('puck'); b.el.classList.add('puck'); }
           }
         }
         bodies.forEach(clampBody);
       }
       bodies.forEach(function(q){
         q.el.style.left = q.x + 'px'; q.el.style.top = q.y + 'px';
-        if (q.drag || Math.abs(q.vx) + Math.abs(q.vy) > 0.06 || (c.k && (Math.abs(q.hx - q.x) + Math.abs(q.hy - q.y)) > 0.6)) moving = true;
+        if (q.drag || Math.abs(q.vx) + Math.abs(q.vy) >= STOP) moving = true;
       });
       return moving;
     }
+    function refreshHover(){
+      if (!ptr || drag) return;
+      var t = document.elementFromPoint(ptr.x, ptr.y);
+      if (t) t.dispatchEvent(new PointerEvent('pointermove', { bubbles: true, clientX: ptr.x, clientY: ptr.y }));
+    }
     function loop(t){
       var dt = Math.min(3, (t - (lastT || t)) / 16.67 || 1); lastT = t;
-      if (step(dt)) raf = requestAnimationFrame(loop); else { raf = 0; lastT = 0; }
+      var mv = step(dt); refreshHover();
+      if (mv) raf = requestAnimationFrame(loop); else { raf = 0; lastT = 0; document.documentElement.classList.remove('drag-on'); }
     }
     function kick(){ if (!raf) { lastT = 0; raf = requestAnimationFrame(loop); } }
     function bodyOf(el){ for (var i = 0; i < bodies.length; i++) if (bodies[i].el === el) return bodies[i]; }
+    document.addEventListener('pointermove', function(e){ ptr = { x: e.clientX, y: e.clientY }; }, true);
     els.forEach(function(el){
       el.addEventListener('pointerdown', function(e){
         if (e.button !== 0) return;
         var b = bodyOf(el), fr = field.getBoundingClientRect(); e.preventDefault();
         try { el.setPointerCapture(e.pointerId); } catch (x) {}
-        b.drag = true; b.vx = b.vy = 0; el.classList.add('dragging'); document.documentElement.classList.add('drag-on');
-        drag = { b: b, ox: e.clientX - fr.left - b.x, oy: e.clientY - fr.top - b.y, lx: b.x, ly: b.y, lt: performance.now() };
+        b.drag = true; b.vx = b.vy = 0; el.classList.add('dragging', 'puck'); document.documentElement.classList.add('drag-on');
+        drag = { b: b, ox: e.clientX - fr.left - b.x, oy: e.clientY - fr.top - b.y, hist: [{ x: b.x, y: b.y, t: performance.now() }] };
         kick();
       });
       el.addEventListener('pointermove', function(e){
         if (!drag || drag.b.el !== el) return;
-        var fr = field.getBoundingClientRect(), b = drag.b, nx = e.clientX - fr.left - drag.ox, ny = e.clientY - fr.top - drag.oy, now = performance.now(), dtm = Math.max(1, now - drag.lt) / 16.67;
-        var ovx = (nx - b.x) / dtm, ovy = (ny - b.y) / dtm;
-        b.vx = b.vx * 0.5 + ovx * 0.5; b.vy = b.vy * 0.5 + ovy * 0.5;
-        b.x = nx; b.y = ny; drag.lt = now; clampBody(b); kick();
+        var fr = field.getBoundingClientRect(), b = drag.b, now = performance.now();
+        var nx = e.clientX - fr.left - drag.ox, ny = e.clientY - fr.top - drag.oy;
+        var k = bounds(b); nx = Math.max(k.x0, Math.min(k.x1, nx)); ny = Math.max(k.y0, Math.min(k.y1, ny));
+        drag.hist.push({ x: nx, y: ny, t: now }); while (drag.hist.length > 2 && now - drag.hist[0].t > 90) drag.hist.shift();
+        var h0 = drag.hist[0], dtm = Math.max(1, now - h0.t) / 16.67;
+        b.vx = (nx - h0.x) / dtm; b.vy = (ny - h0.y) / dtm;
+        b.x = nx; b.y = ny; kick();
       });
-      function up(){
+      function up(e){
         if (!drag || drag.b.el !== el) return;
-        var b = drag.b, sp = Math.sqrt(b.vx * b.vx + b.vy * b.vy), cap = 38;
-        if (performance.now() - drag.lt > 90) { b.vx = b.vy = 0; }
-        else if (sp > cap) { b.vx *= cap / sp; b.vy *= cap / sp; }
-        b.drag = false; el.classList.remove('dragging'); document.documentElement.classList.remove('drag-on'); drag = null; kick();
+        var b = drag.b, now = performance.now(), last = drag.hist[drag.hist.length - 1];
+        if (now - last.t > 70) { b.vx = b.vy = 0; }
+        else { var sp = Math.sqrt(b.vx * b.vx + b.vy * b.vy), cap = 46; if (sp > cap) { b.vx *= cap / sp; b.vy *= cap / sp; } }
+        b.drag = false; el.classList.remove('dragging'); drag = null;
+        try { el.releasePointerCapture(e.pointerId); } catch (x) {}
+        kick();
       }
-      el.addEventListener('pointerup', up); el.addEventListener('pointercancel', up);
-      el.addEventListener('dragstart', function(e){ e.preventDefault(); });
+      el.addEventListener('pointerup', up); el.addEventListener('pointercancel', up); el.addEventListener('lostpointercapture', up);
+      el.addEventListener('dragstart', function(ev){ ev.preventDefault(); });
     });
     window.addEventListener('resize', function(){ measure(); });
-    // temporary preview switch
-    var band = document.querySelector('.hero-band');
-    if (band) {
-      var box = document.createElement('div'); box.className = 'dragmode';
-      box.innerHTML = '<span>Drag physics</span><button type="button" data-m="back">Float back</button><button type="button" data-m="stay">Stay put</button>';
-      band.appendChild(box);
-      function sync(){ Array.prototype.forEach.call(box.querySelectorAll('button'), function(bt){ bt.setAttribute('aria-pressed', bt.getAttribute('data-m') === mode ? 'true' : 'false'); }); }
-      box.addEventListener('click', function(e){ var bt = e.target.closest('button'); if (!bt) return; mode = bt.getAttribute('data-m'); sync(); kick(); });
-      sync();
-    }
   })();
 </script>
