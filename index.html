@@ -822,7 +822,7 @@
   .theme-btn .sun{display:none;}
   .halo *{fill:var(--st-edge,#fff);stroke:var(--st-edge,#fff);}
   /* Dark mode: explicit choice, or the system setting unless light was chosen */
-  :root[data-theme="dark"]{--ink:#e6ecea;--ink-soft:#a4b0ac;--paper:#090e0c;--paper-alt:#131a17;--line:#1f2925;--muted:#18211e;--g:.04;--st-edge:#55645e;color-scheme:dark;}
+  :root[data-theme="dark"]{--ink:#e6ecea;--ink-soft:#a4b0ac;--paper:#090e0c;--paper-alt:#131a17;--line:#1f2925;--muted:#18211e;--g:.04;--st-edge:#0e1411;color-scheme:dark;}
   :root[data-theme="dark"] .fi,:root[data-theme="dark"] .ob{background:var(--paper-alt);box-shadow:0 10px 30px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.07);}
   :root[data-theme="dark"] .fi .mk,:root[data-theme="dark"] .fi.dot .mk,:root[data-theme="dark"] .mk.has{background:transparent!important;}
   :root[data-theme="dark"] .fi[data-name="Notion"] img,:root[data-theme="dark"] .fi[data-name="FullStory"] img,:root[data-theme="dark"] .ob[data-name="Notion"] img,:root[data-theme="dark"] .ob[data-name="FullStory"] img{filter:invert(1);}
@@ -842,7 +842,7 @@
   :root[data-theme="dark"] .s1-dots button:hover::before{background:#6b7f78;}
   :root[data-theme="dark"] .theme-btn .sun{display:block;}:root[data-theme="dark"] .theme-btn .moon{display:none;}
   @media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){--ink:#e6ecea;--ink-soft:#a4b0ac;--paper:#090e0c;--paper-alt:#131a17;--line:#1f2925;--muted:#18211e;--g:.04;--st-edge:#55645e;color-scheme:dark;}
+  :root:not([data-theme="light"]){--ink:#e6ecea;--ink-soft:#a4b0ac;--paper:#090e0c;--paper-alt:#131a17;--line:#1f2925;--muted:#18211e;--g:.04;--st-edge:#0e1411;color-scheme:dark;}
   :root:not([data-theme="light"]) .fi,:root:not([data-theme="light"]) .ob{background:var(--paper-alt);box-shadow:0 10px 30px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.07);}
   :root:not([data-theme="light"]) .fi .mk,:root:not([data-theme="light"]) .fi.dot .mk,:root:not([data-theme="light"]) .mk.has{background:transparent!important;}
   :root:not([data-theme="light"]) .fi[data-name="Notion"] img,:root:not([data-theme="light"]) .fi[data-name="FullStory"] img,:root:not([data-theme="light"]) .ob[data-name="Notion"] img,:root:not([data-theme="light"]) .ob[data-name="FullStory"] img{filter:invert(1);}
@@ -872,18 +872,22 @@
   }
 
 /* dark sticker + logo refinements */
-:root[data-theme="dark"] .bd.bs4 .p4,:root[data-theme="dark"] .bd .pv{filter:brightness(.58) saturate(1.05) drop-shadow(0 2px 3px rgba(0,0,0,.45));}
-:root[data-theme="dark"] .bd.bs4 li:hover .p4{filter:brightness(.7) saturate(1.05) drop-shadow(0 10px 14px rgba(0,0,0,.55));}
+:root[data-theme="dark"] .bd.bs4 .p4,:root[data-theme="dark"] .bd .pv{filter:drop-shadow(0 2px 3px rgba(0,0,0,.5));}
+:root[data-theme="dark"] .bd.bs4 li:hover .p4{filter:drop-shadow(0 10px 14px rgba(0,0,0,.6));}
 :root[data-theme="dark"] .fi[data-name="Notion"] img,:root[data-theme="dark"] .fi[data-name="FullStory"] img,:root[data-theme="dark"] .ob[data-name="Notion"] img,:root[data-theme="dark"] .ob[data-name="FullStory"] img{filter:invert(1);mix-blend-mode:screen;}
 @media (prefers-color-scheme: dark){
-:root:not([data-theme="light"]) .bd.bs4 .p4,:root:not([data-theme="light"]) .bd .pv{filter:brightness(.58) saturate(1.05) drop-shadow(0 2px 3px rgba(0,0,0,.45));}
-:root:not([data-theme="light"]) .bd.bs4 li:hover .p4{filter:brightness(.7) saturate(1.05) drop-shadow(0 10px 14px rgba(0,0,0,.55));}
+:root:not([data-theme="light"]) .bd.bs4 .p4,:root:not([data-theme="light"]) .bd .pv{filter:drop-shadow(0 2px 3px rgba(0,0,0,.5));}
+:root:not([data-theme="light"]) .bd.bs4 li:hover .p4{filter:drop-shadow(0 10px 14px rgba(0,0,0,.6));}
 :root:not([data-theme="light"]) .fi[data-name="Notion"] img,:root:not([data-theme="light"]) .fi[data-name="FullStory"] img,:root:not([data-theme="light"]) .ob[data-name="Notion"] img,:root:not([data-theme="light"]) .ob[data-name="FullStory"] img{filter:invert(1);mix-blend-mode:screen;}
 }
 
 /* dark: remove light placeholder fringe around photos */
 :root[data-theme="dark"] .ph{background:#141b18;}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ph{background:#141b18;}}
+
+.bd .pv{--sb:var(--sb-l);--si:var(--si-l);}
+:root[data-theme="dark"] .bd .pv{--sb:var(--sb-d);--si:var(--si-d);}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .bd .pv{--sb:var(--sb-d);--si:var(--si-d);}}
 </style>
 
 <a class="skip" href="#experience">Skip to content</a>
@@ -1358,12 +1362,12 @@
     }
     function mkSvg(cls, html){ var v = document.createElementNS(NS, 'svg'); v.setAttribute('viewBox', '0 0 120 120'); v.setAttribute('aria-hidden', 'true'); v.setAttribute('class', 'pv ' + cls); v.innerHTML = html; return v; }
     var SH = [
-      { n: 'scallop', k: 6, amp: 4.8, bg: '#cfe8d8', deep: '#86b39d', light: '#e9f5ee' },
-      { n: 'scallop', k: 9, amp: 3.8, bg: '#fbe39a', deep: '#d4ae45', light: '#fdf1c4' },
-      { n: 'square', bg: '#e6d4ee', deep: '#b296c7', light: '#f2e8f7' },
-      { n: 'hex', bg: '#fdc9a2', deep: '#e2975f', light: '#fee3cf' },
-      { n: 'circle', bg: '#c6e5f6', deep: '#82b5d3', light: '#e1f1fb' },
-      { n: 'scallop', k: 12, amp: 3, bg: '#e3edc3', deep: '#a3b86b', light: '#f0f5dc' }
+      { n: 'scallop', k: 6, amp: 4.8, bg: '#cfe8d8', dbg: '#1d3a2d', dic: '#8fd4b0', deep: '#86b39d', light: '#e9f5ee' },
+      { n: 'scallop', k: 9, amp: 3.8, bg: '#fbe39a', dbg: '#4a3c12', dic: '#f3d06a', deep: '#d4ae45', light: '#fdf1c4' },
+      { n: 'square', bg: '#e6d4ee', dbg: '#38274a', dic: '#cfa9e8', deep: '#b296c7', light: '#f2e8f7' },
+      { n: 'hex', bg: '#fdc9a2', dbg: '#4a2c19', dic: '#f5a773', deep: '#e2975f', light: '#fee3cf' },
+      { n: 'circle', bg: '#c6e5f6', dbg: '#183446', dic: '#85c4ea', deep: '#82b5d3', light: '#e1f1fb' },
+      { n: 'scallop', k: 12, amp: 3, bg: '#e3edc3', dbg: '#323d1a', dic: '#c3d978', deep: '#a3b86b', light: '#f0f5dc' }
     ];
     function shp(kind, fill, kk, amp){
       var pts = [], n = 200, i, a, r;
@@ -1388,8 +1392,10 @@
       function(t){ return { C: t.deep, B: t.bg }; }
     ];
     function sticker(k, i, v){
-      var t = SH[i % SH.length], c = STY[v](t), halo = v === 3 ? '<g transform="translate(60 60) scale(1.1) translate(-60 -60)">' + shp(t.n, '#ffffff', t.k, t.amp) + '</g>' : '';
-      return mkSvg('pv p' + (v + 1), halo + shp(t.n, t.bg, t.k, t.amp) + '<g transform="translate(60 60) scale(.48) translate(-50 -50)">' + GL[k](c.C, c.B) + '</g>');
+      var t = SH[i % SH.length], c = STY[v](t), halo = v === 3 ? '<g transform="translate(60 60) scale(1.1) translate(-60 -60)">' + shp(t.n, 'var(--st-edge,#ffffff)', t.k, t.amp) + '</g>' : '';
+      var sv = mkSvg('pv p' + (v + 1), halo + shp(t.n, 'var(--sb)', t.k, t.amp) + '<g transform="translate(60 60) scale(.48) translate(-50 -50)">' + GL[k]('var(--si)', 'var(--sb)') + '</g>');
+      sv.setAttribute('style', '--sb-l:' + t.bg + ';--si-l:' + c.C + ';--sb-d:' + t.dbg + ';--si-d:' + t.dic);
+      return sv;
     }
     var ORDER = ['Books', 'Volunteering', 'Movies', 'Antiques', 'Traveling', 'Art and museums'], KEYS = Object.keys(IC);
     ORDER.forEach(function(k){
