@@ -1446,8 +1446,8 @@
     var mq = window.matchMedia('(prefers-color-scheme: dark)'), de = document.documentElement;
     function eff(){ var t = de.getAttribute('data-theme'); return t || (mq.matches ? 'dark' : 'light'); }
     function lab(){ var d = eff() === 'dark'; b.setAttribute('aria-label', d ? 'Switch to light mode' : 'Switch to dark mode'); }
-    b.addEventListener('click', function(){ var n = eff() === 'dark' ? 'light' : 'dark'; de.setAttribute('data-theme', n); try { localStorage.setItem('mt-theme', n); } catch(e) {} lab(); });
-    if (mq.addEventListener) mq.addEventListener('change', lab);
+    b.addEventListener('click', function(){ var n = eff() === 'dark' ? 'light' : 'dark'; de.setAttribute('data-theme', n); lab(); });
+    if (mq.addEventListener) mq.addEventListener('change', function(){ de.removeAttribute('data-theme'); lab(); });
     lab();
   })();
 
