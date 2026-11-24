@@ -822,7 +822,7 @@
   .theme-btn .sun{display:none;}
   .halo *{fill:var(--st-edge,#fff);stroke:var(--st-edge,#fff);}
   /* Dark mode: explicit choice, or the system setting unless light was chosen */
-  :root[data-theme="dark"]{--ink:#e6ecea;--ink-soft:#a4b0ac;--paper:#090e0c;--paper-alt:#131a17;--line:#1f2925;--muted:#18211e;--g:.04;--st-edge:#0e1411;color-scheme:dark;}
+  :root[data-theme="dark"]{--ink:#e6ecea;--ink-soft:#a4b0ac;--paper:#090e0c;--paper-alt:#131a17;--line:#1f2925;--muted:#18211e;--g:.04;--st-edge:#1f2a25;color-scheme:dark;}
   :root[data-theme="dark"] .fi,:root[data-theme="dark"] .ob{background:var(--paper-alt);box-shadow:0 10px 30px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.07);}
   :root[data-theme="dark"] .fi .mk,:root[data-theme="dark"] .fi.dot .mk,:root[data-theme="dark"] .mk.has{background:transparent!important;}
   :root[data-theme="dark"] .fi[data-name="Notion"] img,:root[data-theme="dark"] .fi[data-name="FullStory"] img,:root[data-theme="dark"] .ob[data-name="Notion"] img,:root[data-theme="dark"] .ob[data-name="FullStory"] img{filter:invert(1);}
@@ -842,7 +842,7 @@
   :root[data-theme="dark"] .s1-dots button:hover::before{background:#6b7f78;}
   :root[data-theme="dark"] .theme-btn .sun{display:block;}:root[data-theme="dark"] .theme-btn .moon{display:none;}
   @media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){--ink:#e6ecea;--ink-soft:#a4b0ac;--paper:#090e0c;--paper-alt:#131a17;--line:#1f2925;--muted:#18211e;--g:.04;--st-edge:#0e1411;color-scheme:dark;}
+  :root:not([data-theme="light"]){--ink:#e6ecea;--ink-soft:#a4b0ac;--paper:#090e0c;--paper-alt:#131a17;--line:#1f2925;--muted:#18211e;--g:.04;--st-edge:#1f2a25;color-scheme:dark;}
   :root:not([data-theme="light"]) .fi,:root:not([data-theme="light"]) .ob{background:var(--paper-alt);box-shadow:0 10px 30px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.07);}
   :root:not([data-theme="light"]) .fi .mk,:root:not([data-theme="light"]) .fi.dot .mk,:root:not([data-theme="light"]) .mk.has{background:transparent!important;}
   :root:not([data-theme="light"]) .fi[data-name="Notion"] img,:root:not([data-theme="light"]) .fi[data-name="FullStory"] img,:root:not([data-theme="light"]) .ob[data-name="Notion"] img,:root:not([data-theme="light"]) .ob[data-name="FullStory"] img{filter:invert(1);}
@@ -872,12 +872,12 @@
   }
 
 /* dark sticker + logo refinements */
-:root[data-theme="dark"] .bd.bs4 .p4,:root[data-theme="dark"] .bd .pv{filter:drop-shadow(0 2px 3px rgba(0,0,0,.5));}
-:root[data-theme="dark"] .bd.bs4 li:hover .p4{filter:drop-shadow(0 10px 14px rgba(0,0,0,.6));}
+:root[data-theme="dark"] .bd.bs4 .p4,:root[data-theme="dark"] .bd .pv{filter:drop-shadow(0 5px 9px rgba(0,0,0,.8));}
+:root[data-theme="dark"] .bd.bs4 li:hover .p4{filter:drop-shadow(0 12px 18px rgba(0,0,0,.85));}
 :root[data-theme="dark"] .fi[data-name="Notion"] img,:root[data-theme="dark"] .fi[data-name="FullStory"] img,:root[data-theme="dark"] .ob[data-name="Notion"] img,:root[data-theme="dark"] .ob[data-name="FullStory"] img{filter:invert(1);mix-blend-mode:screen;}
 @media (prefers-color-scheme: dark){
-:root:not([data-theme="light"]) .bd.bs4 .p4,:root:not([data-theme="light"]) .bd .pv{filter:drop-shadow(0 2px 3px rgba(0,0,0,.5));}
-:root:not([data-theme="light"]) .bd.bs4 li:hover .p4{filter:drop-shadow(0 10px 14px rgba(0,0,0,.6));}
+:root:not([data-theme="light"]) .bd.bs4 .p4,:root:not([data-theme="light"]) .bd .pv{filter:drop-shadow(0 5px 9px rgba(0,0,0,.8));}
+:root:not([data-theme="light"]) .bd.bs4 li:hover .p4{filter:drop-shadow(0 12px 18px rgba(0,0,0,.85));}
 :root:not([data-theme="light"]) .fi[data-name="Notion"] img,:root:not([data-theme="light"]) .fi[data-name="FullStory"] img,:root:not([data-theme="light"]) .ob[data-name="Notion"] img,:root:not([data-theme="light"]) .ob[data-name="FullStory"] img{filter:invert(1);mix-blend-mode:screen;}
 }
 
@@ -888,6 +888,9 @@
 .bd .pv{--sb:var(--sb-l);--si:var(--si-l);}
 :root[data-theme="dark"] .bd .pv{--sb:var(--sb-d);--si:var(--si-d);}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .bd .pv{--sb:var(--sb-d);--si:var(--si-d);}}
+
+:root[data-theme="dark"] .s1-dots button.on::before{background:var(--ink);}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .s1-dots button.on::before{background:var(--ink);}}
 </style>
 
 <a class="skip" href="#experience">Skip to content</a>
@@ -1392,7 +1395,7 @@
       function(t){ return { C: t.deep, B: t.bg }; }
     ];
     function sticker(k, i, v){
-      var t = SH[i % SH.length], c = STY[v](t), halo = v === 3 ? '<g transform="translate(60 60) scale(1.1) translate(-60 -60)">' + shp(t.n, 'var(--st-edge,#ffffff)', t.k, t.amp) + '</g>' : '';
+      var t = SH[i % SH.length], c = STY[v](t), halo = v === 3 ? '<g transform="translate(60 60) scale(1.13) translate(-60 -60)">' + shp(t.n, 'var(--st-edge,#ffffff)', t.k, t.amp) + '</g>' : '';
       var sv = mkSvg('pv p' + (v + 1), halo + shp(t.n, 'var(--sb)', t.k, t.amp) + '<g transform="translate(60 60) scale(.48) translate(-50 -50)">' + GL[k]('var(--si)', 'var(--sb)') + '</g>');
       sv.setAttribute('style', '--sb-l:' + t.bg + ';--si-l:' + c.C + ';--sb-d:' + t.dbg + ';--si-d:' + t.dic);
       return sv;
