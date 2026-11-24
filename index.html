@@ -1194,7 +1194,7 @@
     function pick(el){
       var t = el && el.closest ? el.closest('[data-sel],.fi,.ob') : null;
       if (t && !hero.contains(t)) t = null;
-      if (t && window.__sliding && (t.classList.contains('fi') || t.classList.contains('ob'))) t = null;
+      if (t && window.__slidingEl && t === window.__slidingEl) t = null;
       if (t) { clearTimeout(hideT); if (t !== target) setTarget(t); }
       else if (target && !hideT) { hideT = setTimeout(function(){ hideT = 0; target = null; place(); }, 170); }
       if (t) hideT = 0;
@@ -1579,8 +1579,10 @@
     }
     function loop(t){
       var dt = Math.min(3, (t - (lastT || t)) / 16.67 || 1); lastT = t;
-      var mv = step(dt); refreshHover();
-      if (mv) raf = requestAnimationFrame(loop); else { raf = 0; lastT = 0; window.__sliding = false; document.documentElement.classList.remove('drag-on'); }
+      var mv = step(dt);
+      var se = window.__slidingEl; if (se) { var sb = bodyOf(se); if (!sb || (!sb.vx && !sb.vy && !sb.drag)) { window.__slidingEl = null; ptr && (ptr.re = 1); } }
+      refreshHover();
+      if (mv) raf = requestAnimationFrame(loop); else { raf = 0; lastT = 0; document.documentElement.classList.remove('drag-on'); }
     }
     function kick(){ if (!raf) { lastT = 0; raf = requestAnimationFrame(loop); } }
     function bodyOf(el){ for (var i = 0; i < bodies.length; i++) if (bodies[i].el === el) return bodies[i]; }
@@ -1590,7 +1592,7 @@
         if (e.button !== 0) return;
         var b = bodyOf(el), fr = field.getBoundingClientRect(); e.preventDefault();
         try { el.setPointerCapture(e.pointerId); } catch (x) {}
-        b.drag = true; b.vx = b.vy = 0; el.classList.add('dragging', 'puck'); document.documentElement.classList.add('drag-on');
+        window.__slidingEl = null; b.drag = true; b.vx = b.vy = 0; el.classList.add('dragging', 'puck'); document.documentElement.classList.add('drag-on');
         drag = { b: b, ox: e.clientX - fr.left - b.x, oy: e.clientY - fr.top - b.y, hist: [{ x: b.x, y: b.y, t: performance.now() }] };
         kick();
       });
@@ -1609,7 +1611,7 @@
         var b = drag.b, now = performance.now(), last = drag.hist[drag.hist.length - 1];
         if (now - last.t > 70) { b.vx = b.vy = 0; }
         else { var sp = Math.sqrt(b.vx * b.vx + b.vy * b.vy), cap = 46; if (sp > cap) { b.vx *= cap / sp; b.vy *= cap / sp; } }
-        b.drag = false; el.classList.remove('dragging'); drag = null; window.__sliding = true; if (window.__hideSel) window.__hideSel();
+        b.drag = false; el.classList.remove('dragging'); drag = null; window.__slidingEl = el; if (window.__hideSel) window.__hideSel();
         try { el.releasePointerCapture(e.pointerId); } catch (x) {}
         kick();
       }
