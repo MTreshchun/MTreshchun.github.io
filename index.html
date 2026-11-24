@@ -1190,9 +1190,11 @@
       target = t; cancelAnimationFrame(raf);
       if (icon) follow(); else place();
     }
+    window.__hideSel = function(){ clearTimeout(hideT); hideT = 0; target = null; fsel.style.setProperty('transition', 'none', 'important'); place(); void fsel.offsetWidth; fsel.style.removeProperty('transition'); };
     function pick(el){
       var t = el && el.closest ? el.closest('[data-sel],.fi,.ob') : null;
       if (t && !hero.contains(t)) t = null;
+      if (t && window.__sliding && (t.classList.contains('fi') || t.classList.contains('ob'))) t = null;
       if (t) { clearTimeout(hideT); if (t !== target) setTarget(t); }
       else if (target && !hideT) { hideT = setTimeout(function(){ hideT = 0; target = null; place(); }, 170); }
       if (t) hideT = 0;
@@ -1496,15 +1498,39 @@
       if (b.y < k.y0) { b.y = k.y0; if (!b.drag) b.vy = Math.abs(b.vy) * WALL; }
       if (b.y > k.y1) { b.y = k.y1; if (!b.drag) b.vy = -Math.abs(b.vy) * WALL; }
     }
-    function step(dt){
-      var moving = false, i, j, a, b, it;
-      bodies.forEach(function(q){
-        if (q.drag) return;
-        var f = Math.pow(FRICTION, dt); q.vx *= f; q.vy *= f;
-        if (Math.abs(q.vx) + Math.abs(q.vy) < STOP) { q.vx = q.vy = 0; }
-        q.x += q.vx * dt; q.y += q.vy * dt;
+    var rects = [];
+    function calcRects(){
+      var fr = field.getBoundingClientRect(); rects = [];
+      ['.hx1 h1', '.hx1 .ab'].forEach(function(sel){
+        var e = document.querySelector(sel); if (!e || e.offsetParent === null) return;
+        var rg = document.createRange(); rg.selectNodeContents(e); var r = rg.getBoundingClientRect(); if (!r.width) return;
+        rects.push({ l: r.left - fr.left - 8, r: r.right - fr.left + 8, t: r.top - fr.top - 6, b: r.bottom - fr.top + 6 });
       });
-      for (it = 0; it < 4; it++) {
+    }
+    calcRects();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(calcRects);
+    function rectHit(q){
+      if (q.drag) return;
+      rects.forEach(function(R){
+        var cx = Math.max(R.l, Math.min(q.x, R.r)), cy = Math.max(R.t, Math.min(q.y, R.b)), dx = q.x - cx, dy = q.y - cy;
+        if (dx === 0 && dy === 0) {
+          var dl = q.x - R.l, dr = R.r - q.x, dtp = q.y - R.t, db = R.b - q.y, m = Math.min(dl, dr, dtp, db), st = Math.min(m + q.r + 1, 14);
+          if (m === dl) { q.x -= st; q.vx = -Math.max(Math.abs(q.vx), 6); }
+          else if (m === dr) { q.x += st; q.vx = Math.max(Math.abs(q.vx), 6); }
+          else if (m === dtp) { q.y -= st; q.vy = -Math.max(Math.abs(q.vy), 6); }
+          else { q.y += st; q.vy = Math.max(Math.abs(q.vy), 6); }
+        } else {
+          var d = Math.sqrt(dx * dx + dy * dy);
+          if (d < q.r) {
+            var nx = dx / d, ny = dy / d; q.x += nx * (q.r - d); q.y += ny * (q.r - d);
+            var vn = q.vx * nx + q.vy * ny; if (vn < 0) { q.vx -= (1 + WALL) * vn * nx; q.vy -= (1 + WALL) * vn * ny; }
+          }
+        }
+      });
+    }
+    function collide(){
+      var i, j, a, b, it;
+      for (it = 0; it < 3; it++) {
         for (i = 0; i < bodies.length; i++) for (j = i + 1; j < bodies.length; j++) {
           a = bodies[i]; b = bodies[j];
           var dx = b.x - a.x, dy = b.y - a.y, d = Math.sqrt(dx * dx + dy * dy), min = a.r + b.r + 2;
@@ -1524,7 +1550,21 @@
             if (rv < 0) { var jj = -(1 + REST) * rv / 2; a.vx -= jj * nx; a.vy -= jj * ny; b.vx += jj * nx; b.vy += jj * ny; a.el.classList.add('puck'); b.el.classList.add('puck'); }
           }
         }
-        bodies.forEach(clampBody);
+        bodies.forEach(function(q){ rectHit(q); clampBody(q); });
+      }
+    }
+    function step(dt){
+      var maxv = 0, moving = false;
+      bodies.forEach(function(q){ if (!q.drag) maxv = Math.max(maxv, Math.sqrt(q.vx * q.vx + q.vy * q.vy)); });
+      var n = Math.max(1, Math.min(6, Math.ceil(maxv * dt / 10))), h = dt / n;
+      for (var s2 = 0; s2 < n; s2++) {
+        bodies.forEach(function(q){
+          if (q.drag) return;
+          var f = Math.pow(FRICTION, h); q.vx *= f; q.vy *= f;
+          if (Math.abs(q.vx) + Math.abs(q.vy) < STOP) { q.vx = q.vy = 0; }
+          q.x += q.vx * h; q.y += q.vy * h;
+        });
+        collide();
       }
       bodies.forEach(function(q){
         q.el.style.left = q.x + 'px'; q.el.style.top = q.y + 'px';
@@ -1540,7 +1580,7 @@
     function loop(t){
       var dt = Math.min(3, (t - (lastT || t)) / 16.67 || 1); lastT = t;
       var mv = step(dt); refreshHover();
-      if (mv) raf = requestAnimationFrame(loop); else { raf = 0; lastT = 0; document.documentElement.classList.remove('drag-on'); }
+      if (mv) raf = requestAnimationFrame(loop); else { raf = 0; lastT = 0; window.__sliding = false; document.documentElement.classList.remove('drag-on'); }
     }
     function kick(){ if (!raf) { lastT = 0; raf = requestAnimationFrame(loop); } }
     function bodyOf(el){ for (var i = 0; i < bodies.length; i++) if (bodies[i].el === el) return bodies[i]; }
@@ -1569,13 +1609,13 @@
         var b = drag.b, now = performance.now(), last = drag.hist[drag.hist.length - 1];
         if (now - last.t > 70) { b.vx = b.vy = 0; }
         else { var sp = Math.sqrt(b.vx * b.vx + b.vy * b.vy), cap = 46; if (sp > cap) { b.vx *= cap / sp; b.vy *= cap / sp; } }
-        b.drag = false; el.classList.remove('dragging'); drag = null;
+        b.drag = false; el.classList.remove('dragging'); drag = null; window.__sliding = true; if (window.__hideSel) window.__hideSel();
         try { el.releasePointerCapture(e.pointerId); } catch (x) {}
         kick();
       }
       el.addEventListener('pointerup', up); el.addEventListener('pointercancel', up); el.addEventListener('lostpointercapture', up);
       el.addEventListener('dragstart', function(ev){ ev.preventDefault(); });
     });
-    window.addEventListener('resize', function(){ measure(); });
+    window.addEventListener('resize', function(){ measure(); calcRects(); });
   })();
 </script>
