@@ -863,8 +863,9 @@
   .mf{position:absolute;left:calc(var(--x) * 1% - var(--s) * .5px);top:var(--t,auto);bottom:var(--bt,auto);width:calc(var(--s) * 1px);height:calc(var(--s) * 1px);border-radius:50%;background:var(--paper);box-shadow:0 10px 26px rgba(22,53,42,.12),0 0 0 1px rgba(22,53,42,.05);display:grid;place-items:center;animation:mfbob calc(4.4s + var(--i) * .35s) ease-in-out infinite;animation-delay:calc(var(--i) * -.7s);}
   .mf .mk{width:100%;height:100%;border-radius:50%;overflow:hidden;}
   .mf .mono{font-size:20px;}
-  .x1-center{padding-top:136px;padding-bottom:136px;}
-  .v5::before{-webkit-mask-image:linear-gradient(#000 0%,#000 80%,transparent 100%);mask-image:linear-gradient(#000 0%,#000 80%,transparent 100%);}
+  .hx1{margin-top:20px;min-height:calc(100vh - 92px);min-height:calc(100svh - 92px - env(safe-area-inset-top,0px));}
+  .x1-center{padding-top:128px;padding-bottom:128px;}
+  .v5::before{-webkit-mask-image:linear-gradient(transparent 0%,#000 7%,#000 93%,transparent 100%);mask-image:linear-gradient(transparent 0%,#000 7%,#000 93%,transparent 100%);}
   .stage.soon .big{font-size:clamp(32px,9vw,40px);}
   .contact{padding-bottom:48px;}
   .contact::before{top:-260px;-webkit-mask-image:linear-gradient(transparent 0%,rgba(0,0,0,.18) 30%,#000 78%);mask-image:linear-gradient(transparent 0%,rgba(0,0,0,.18) 30%,#000 78%);}
@@ -917,7 +918,7 @@
 
 <main>
 <div class="hero-band" data-hx="1">
-  <div class="hx hx1 v1 v5" data-x="1"><div class="x1-field xf" data-kind="dot" aria-hidden="true"></div><div class="mfl" aria-hidden="true"></div><div class="wrap x1-center"><h1 data-sel>Research-driven design.<br>Accessible, honest, and built together.</h1><p class="ab" data-sel>I'm a Senior Product Designer with 9+ years of experience improving live products through data, research and continuous learning. I care about accessible, honest design, and about the people I build it with, because a good team makes great products.</p></div></div>
+  <div class="hx hx1 v1 v5" data-x="1"><div class="x1-field xf" data-kind="dot" aria-hidden="true"></div><div class="wrap x1-center"><div class="mfl" aria-hidden="true"></div><h1 data-sel>Research-driven design.<br>Accessible, honest, and built together.</h1><p class="ab" data-sel>I'm a Senior Product Designer with 9+ years of experience improving live products through data, research and continuous learning. I care about accessible, honest design, and about the people I build it with, because a good team makes great products.</p></div></div>
   <div class="wrap"><div class="tools-m" aria-label="Tools I work with"></div></div>
 </div>
 
