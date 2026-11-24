@@ -880,6 +880,10 @@
 :root:not([data-theme="light"]) .bd.bs4 li:hover .p4{filter:brightness(.7) saturate(1.05) drop-shadow(0 10px 14px rgba(0,0,0,.55));}
 :root:not([data-theme="light"]) .fi[data-name="Notion"] img,:root:not([data-theme="light"]) .fi[data-name="FullStory"] img,:root:not([data-theme="light"]) .ob[data-name="Notion"] img,:root:not([data-theme="light"]) .ob[data-name="FullStory"] img{filter:invert(1);mix-blend-mode:screen;}
 }
+
+/* dark: remove light placeholder fringe around photos */
+:root[data-theme="dark"] .ph{background:#141b18;}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ph{background:#141b18;}}
 </style>
 
 <a class="skip" href="#experience">Skip to content</a>
