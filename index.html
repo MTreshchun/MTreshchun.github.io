@@ -23,6 +23,7 @@
 <meta name="twitter:title" content="Maryna Treshchun, Senior Product Designer">
 <meta name="twitter:description" content="Research-driven design. Accessible, honest, and built together.">
 <meta name="twitter:image" content="https://mtreshchun.github.io/share-preview.png">
+<script>try{var t=localStorage.getItem("mt-theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500&display=swap">
 <style>
   /* Layout: sticky nav, merged hero + about, experience, skills tabs, selected work (5 options), education + languages, contact.
@@ -809,6 +810,62 @@
     html{scroll-behavior:auto;}
     *,*::before,*::after{animation:none!important;transition:none!important;}
   }
+
+  /* Theme button */
+  .nav-right{display:flex;align-items:center;gap:10px;}
+  .theme-btn{width:32px;height:32px;display:grid;place-items:center;padding:0;border:0;border-radius:6px;background:var(--paper-alt);color:var(--ink-soft);cursor:pointer;transition:color .2s,background .2s;}
+  .theme-btn:hover{color:var(--ink);background:#d3e2df;}
+  .theme-btn svg{width:17px;height:17px;}
+  .theme-btn .sun{display:none;}
+  /* Dark mode: explicit choice, or the system setting unless light was chosen */
+  :root[data-theme="dark"]{--ink:#e4eeeb;--ink-soft:#a8b8b3;--paper:#0d1d17;--paper-alt:#173028;--line:#243d35;--muted:#1b332b;--g:.05;color-scheme:dark;}
+  :root[data-theme="dark"] .fi,:root[data-theme="dark"] .ob,:root[data-theme="dark"] .pol{--ink:#16352a;--ink-soft:#555e5e;--paper:#fdfeff;--paper-alt:#ebf2f1;--line:#dde7e5;--muted:#dfe9e7;}
+  :root[data-theme="dark"] .pol{color:#555e5e;}
+  :root[data-theme="dark"] .fi .fl,:root[data-theme="dark"] .ob .fl{color:#b3c3be;}
+  :root[data-theme="dark"] .fi::after,:root[data-theme="dark"] .ob::after{background:#e4eeeb;color:#0d1d17;}
+  :root[data-theme="dark"] header.nav{background:rgba(13,29,23,.92);}
+  :root[data-theme="dark"] .xbtn:hover,:root[data-theme="dark"] .ow-row:hover .ow-ic,:root[data-theme="dark"] .owbtn:hover,:root[data-theme="dark"] .bdbtn:hover,:root[data-theme="dark"] .abtn:hover,:root[data-theme="dark"] .kbtn:hover,:root[data-theme="dark"] .s1-arr:hover,:root[data-theme="dark"] .nav-cta:hover,:root[data-theme="dark"] .sbtn:hover,:root[data-theme="dark"] .vbtn:hover,:root[data-theme="dark"] .btn:hover,:root[data-theme="dark"] .theme-btn:hover{background:#24443a;color:var(--ink);}
+  :root[data-theme="dark"] .hx5{background-image:radial-gradient(rgba(228,238,235,.12) 1px,transparent 1.2px);}
+  :root[data-theme="dark"] .v5::before{background-image:radial-gradient(rgba(228,238,235,.15) 1px,transparent 1.3px);}
+  :root[data-theme="dark"] .dotsbg{background-image:radial-gradient(rgba(228,238,235,.18) 1.2px,transparent 1.7px);}
+  :root[data-theme="dark"] .stage.soon .dotsbg{background-image:radial-gradient(rgba(228,238,235,.09) 1.1px,transparent 1.6px);}
+  :root[data-theme="dark"] .contact::before{background-image:radial-gradient(rgba(228,238,235,.15) 1px,transparent 1.3px);}
+  :root[data-theme="dark"] .cen-in::before{background:radial-gradient(ellipse at center,rgba(13,29,23,.96) 45%,rgba(13,29,23,0) 78%);}
+  :root[data-theme="dark"] .hero-band::before{background:radial-gradient(520px circle at var(--mx,78%) var(--my,22%),rgba(45,86,72,.5),transparent 70%);}
+  :root[data-theme="dark"] [data-anim="1"] .a-t{background-image:linear-gradient(100deg,#e4eeeb 38%,#8fc2b4 50%,#e4eeeb 62%);}
+  :root[data-theme="dark"] [data-anim="1"] .a-l{background-image:linear-gradient(100deg,#a8b8b3 38%,#d4e6e1 50%,#a8b8b3 62%);}
+  :root[data-theme="dark"] .s1-dots button::before{background:#2b4a40;}
+  :root[data-theme="dark"] .s1-dots button:hover::before{background:#5f857c;}
+  :root[data-theme="dark"] .theme-btn .sun{display:block;}:root[data-theme="dark"] .theme-btn .moon{display:none;}
+  @media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--ink:#e4eeeb;--ink-soft:#a8b8b3;--paper:#0d1d17;--paper-alt:#173028;--line:#243d35;--muted:#1b332b;--g:.05;color-scheme:dark;}
+  :root:not([data-theme="light"]) .fi,:root:not([data-theme="light"]) .ob,:root:not([data-theme="light"]) .pol{--ink:#16352a;--ink-soft:#555e5e;--paper:#fdfeff;--paper-alt:#ebf2f1;--line:#dde7e5;--muted:#dfe9e7;}
+  :root:not([data-theme="light"]) .pol{color:#555e5e;}
+  :root:not([data-theme="light"]) .fi .fl,:root:not([data-theme="light"]) .ob .fl{color:#b3c3be;}
+  :root:not([data-theme="light"]) .fi::after,:root:not([data-theme="light"]) .ob::after{background:#e4eeeb;color:#0d1d17;}
+  :root:not([data-theme="light"]) header.nav{background:rgba(13,29,23,.92);}
+  :root:not([data-theme="light"]) .xbtn:hover,:root:not([data-theme="light"]) .ow-row:hover .ow-ic,:root:not([data-theme="light"]) .owbtn:hover,:root:not([data-theme="light"]) .bdbtn:hover,:root:not([data-theme="light"]) .abtn:hover,:root:not([data-theme="light"]) .kbtn:hover,:root:not([data-theme="light"]) .s1-arr:hover,:root:not([data-theme="light"]) .nav-cta:hover,:root:not([data-theme="light"]) .sbtn:hover,:root:not([data-theme="light"]) .vbtn:hover,:root:not([data-theme="light"]) .btn:hover,:root:not([data-theme="light"]) .theme-btn:hover{background:#24443a;color:var(--ink);}
+  :root:not([data-theme="light"]) .hx5{background-image:radial-gradient(rgba(228,238,235,.12) 1px,transparent 1.2px);}
+  :root:not([data-theme="light"]) .v5::before{background-image:radial-gradient(rgba(228,238,235,.15) 1px,transparent 1.3px);}
+  :root:not([data-theme="light"]) .dotsbg{background-image:radial-gradient(rgba(228,238,235,.18) 1.2px,transparent 1.7px);}
+  :root:not([data-theme="light"]) .stage.soon .dotsbg{background-image:radial-gradient(rgba(228,238,235,.09) 1.1px,transparent 1.6px);}
+  :root:not([data-theme="light"]) .contact::before{background-image:radial-gradient(rgba(228,238,235,.15) 1px,transparent 1.3px);}
+  :root:not([data-theme="light"]) .cen-in::before{background:radial-gradient(ellipse at center,rgba(13,29,23,.96) 45%,rgba(13,29,23,0) 78%);}
+  :root:not([data-theme="light"]) .hero-band::before{background:radial-gradient(520px circle at var(--mx,78%) var(--my,22%),rgba(45,86,72,.5),transparent 70%);}
+  :root:not([data-theme="light"]) [data-anim="1"] .a-t{background-image:linear-gradient(100deg,#e4eeeb 38%,#8fc2b4 50%,#e4eeeb 62%);}
+  :root:not([data-theme="light"]) [data-anim="1"] .a-l{background-image:linear-gradient(100deg,#a8b8b3 38%,#d4e6e1 50%,#a8b8b3 62%);}
+  :root:not([data-theme="light"]) .s1-dots button::before{background:#2b4a40;}
+  :root:not([data-theme="light"]) .s1-dots button:hover::before{background:#5f857c;}
+  :root:not([data-theme="light"]) .theme-btn .sun{display:block;}:root:not([data-theme="light"]) .theme-btn .moon{display:none;}
+  }
+
+  @media (max-width:480px){
+    .nav-right{gap:8px;}
+    .nav-name{white-space:nowrap;}
+    [data-nav="shrink"] .nav-name,.nav-name{font-size:12.5px;letter-spacing:0.08em;}
+    [data-nav="shrink"] header.nav.solid .nav-name{font-size:12.5px;letter-spacing:0.08em;}
+    .nav-cta{padding:7px 12px;}
+  }
 </style>
 
 <a class="skip" href="#experience">Skip to content</a>
@@ -821,7 +878,10 @@
       <a href="#skills">Skills</a>
       <a href="#outside">Outside of work</a>
     </nav>
-    <a class="nav-cta" href="#contact">Contact</a>
+    <div class="nav-right">
+      <button class="theme-btn" type="button" aria-label="Switch to dark mode"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+      <a class="nav-cta" href="#contact">Contact</a>
+    </div>
   </div>
 </header>
 
@@ -1348,6 +1408,17 @@
       }
     });
   });
+
+  // Theme toggle: follows the system until the visitor chooses
+  (function(){
+    var b = document.querySelector('.theme-btn'); if (!b) return;
+    var mq = window.matchMedia('(prefers-color-scheme: dark)'), de = document.documentElement;
+    function eff(){ var t = de.getAttribute('data-theme'); return t || (mq.matches ? 'dark' : 'light'); }
+    function lab(){ var d = eff() === 'dark'; b.setAttribute('aria-label', d ? 'Switch to light mode' : 'Switch to dark mode'); }
+    b.addEventListener('click', function(){ var n = eff() === 'dark' ? 'light' : 'dark'; de.setAttribute('data-theme', n); try { localStorage.setItem('mt-theme', n); } catch(e) {} lab(); });
+    if (mq.addEventListener) mq.addEventListener('change', lab);
+    lab();
+  })();
 </script>
 </body>
 </html>
