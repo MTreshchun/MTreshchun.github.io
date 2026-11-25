@@ -640,7 +640,9 @@
   .more-in{overflow:hidden;min-height:0;opacity:0;transition:opacity .4s ease;}
   .more.open .more-in{opacity:1;}
   /* nav: opaque, and paints its own colour upward so nothing shows between an app's top bar (Telegram etc.) and the nav */
-  header.nav,:root[data-theme="dark"] header.nav{background:var(--paper)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:0 -600px 0 0 var(--paper);}
+  header.nav,:root[data-theme="dark"] header.nav{background:var(--paper)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;}
+  /* nav paints its own colour upward, so page content never shows between an app top bar and the nav */
+  header.nav::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:800px;background:var(--paper);pointer-events:none;}
   @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) header.nav{background:var(--paper)!important;}}
   /* bigger tap targets on phones */
   @media (max-width:820px){.theme-btn{width:40px!important;height:40px!important;}.nav-cta{min-height:40px;display:inline-flex;align-items:center;}.nav-name{padding:8px 6px;margin-left:-6px;}a.ext,.ext{display:inline-flex;align-items:center;min-height:40px;}}
