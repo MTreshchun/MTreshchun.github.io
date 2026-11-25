@@ -27,6 +27,15 @@
 <meta name="twitter:description" content="I believe in accessible, honest design, built together.">
 <meta name="twitter:image" content="https://mtreshchun.github.io/share-preview.jpg">
 <script>try{localStorage.removeItem("mt-theme");}catch(e){}</script>
+<script>/* iOS in-app browsers (Telegram etc.) let page content scroll under their top bar. There, scroll inside <body> so content stays below the bar. */
+(function(){var ua=navigator.userAgent;if(!/iP(hone|ad|od)/.test(ua)||(/Safari\//.test(ua)&&!/Telegram/i.test(ua)))return;
+var de=document.documentElement;de.classList.add('sc-mode');
+function top(){return document.body?document.body.scrollTop:0;}
+['pageYOffset','scrollY'].forEach(function(k){try{Object.defineProperty(window,k,{get:top,configurable:true});}catch(e){}});
+window.scrollTo=function(a,b){var o=(a&&typeof a==='object')?a:{left:a||0,top:b||0};document.body.scrollTo(o);};
+window.scrollBy=function(a,b){var o=(a&&typeof a==='object')?a:{left:a||0,top:b||0};document.body.scrollBy(o);};
+document.addEventListener('DOMContentLoaded',function(){document.body.addEventListener('scroll',function(){window.dispatchEvent(new Event('scroll'));},{passive:true});});
+})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:opsz,wght@9..144,300..500&display=swap">
 <style>
   
@@ -642,6 +651,9 @@
   /* nav: opaque, and paints its own colour upward so nothing shows between an app's top bar (Telegram etc.) and the nav */
   header.nav,:root[data-theme="dark"] header.nav{background:var(--paper)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;}
   /* nav paints its own colour upward, so page content never shows between an app top bar and the nav */
+  /* in-app browsers on iOS: scroll inside body so nothing shows above the nav */
+  html.sc-mode{height:100%;overflow:hidden;}
+  html.sc-mode body{height:100%;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;}
   header.nav::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:800px;background:var(--paper);pointer-events:none;}
   @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) header.nav{background:var(--paper)!important;}}
   /* bigger tap targets on phones */
