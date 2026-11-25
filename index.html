@@ -27,8 +27,8 @@
 <meta name="twitter:description" content="I believe in accessible, honest design, built together.">
 <meta name="twitter:image" content="https://mtreshchun.github.io/share-preview.jpg">
 <script>try{localStorage.removeItem("mt-theme");}catch(e){}</script>
-<script>/* Touch devices: scroll inside <body>, so page content can never show above the nav (in-app browsers like Telegram let it scroll under their top bar). */
-(function(){if(!(window.matchMedia&&matchMedia('(pointer:coarse)').matches))return;
+<script>/* iOS in-app browsers (Telegram etc.) let page content scroll under their top bar. There, scroll inside <body> so content stays below the bar. */
+(function(){var ua=navigator.userAgent;if(!/iP(hone|ad|od)/.test(ua)||(/Safari\//.test(ua)&&!/Telegram/i.test(ua)))return;
 var de=document.documentElement;de.classList.add('sc-mode');
 function top(){return document.body?document.body.scrollTop:0;}
 ['pageYOffset','scrollY'].forEach(function(k){try{Object.defineProperty(window,k,{get:top,configurable:true});}catch(e){}});
