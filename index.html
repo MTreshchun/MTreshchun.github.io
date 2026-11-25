@@ -60,8 +60,10 @@ document.addEventListener('DOMContentLoaded',function(){document.body.addEventLi
   button{font:inherit;}
   .wrap{max-width:var(--maxw);margin:0 auto;padding-left:max(32px,env(safe-area-inset-left,0px));padding-right:max(32px,env(safe-area-inset-right,0px));}
   h1,h2,h3{font-family:var(--display);font-style:italic;font-weight:400;margin:0;letter-spacing:-0.02em;color:var(--ink);}
-  .skip{position:absolute;left:12px;top:-60px;background:var(--ink);color:#fff;padding:10px 16px;border-radius:6px;z-index:100;transition:top .2s;}
-  .skip:focus{top:12px;}
+  /* skip link: truly hidden until keyboard focus (not just parked above the page), text colour follows the theme */
+  .skip{position:absolute;left:12px;top:12px;background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:6px;z-index:100;font-weight:500;text-decoration:none;}
+  .skip:not(:focus){width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;}
+  .skip:focus{outline:2px solid var(--paper);outline-offset:2px;box-shadow:0 0 0 4px var(--ink);}
   :focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:3px;}
   ul{margin:0;}
 
