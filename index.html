@@ -538,7 +538,7 @@ document.addEventListener('DOMContentLoaded',function(){document.body.addEventLi
   .on .kc li,.in .kc li,.kc.in li{opacity:1;transform:none;}@media (hover:hover){.kc li:hover{background:var(--paper-alt);}}
   .sv h3{font-size:26px;line-height:1.15;}
   
-  .s1{height:470vh;position:relative;}
+  .s1{height:320vh;position:relative;}
   .s1-in{position:sticky;top:calc(84px + env(safe-area-inset-top,0px));height:calc(100vh - 120px);min-height:420px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:32px;align-items:center;}
   .s1-in > *{min-width:0;}
   .s1-left{grid-column:1 / span 5;}
@@ -587,7 +587,7 @@ document.addEventListener('DOMContentLoaded',function(){document.body.addEventLi
   .s5-row h3{font-family:var(--sans);font-style:normal;font-size:13px;letter-spacing:0.24em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:14px;}
   .s5-row .kc{transform:translateX(var(--dx,0px));will-change:transform;}
   @media (max-width:820px){
-    .s1{height:520vh;}
+    .s1{height:350vh;}
     .s1-left,.s1-right{grid-column:1 / -1;}
     .s1-in{align-content:center;row-gap:28px;}
     .s3-row h3,.s3-row .kc{grid-column:1 / -1;}
@@ -1086,25 +1086,12 @@ h1,h2,h3{font-weight:350;letter-spacing:-0.025em;}
           <div class="dt">Nov 2025 - Present</div>
         </div>
         <div class="desc">
-          <div class="sub">Emissions management platform</div>
           <ul>
-            <li>As part of a cross-functional team, co-designed an emissions management platform end to end, from early discovery to MVP and beyond. <strong class="hl">Expected customer onboarding time dropped from months to days.</strong> Owned design solo through a team transition and championed its value in a development-heavy team new to working with designers.</li>
-            <li>Led 5+ customer research sessions and initiated bi-weekly client calls, keeping design grounded in customers' day-to-day needs.</li>
-            <li>Post-launch, shadowed live onboarding sessions to drive the next round of improvements, such as unifying data entry points, connecting standalone screens into end-to-end journeys, and enhancing AI-assisted master data onboarding.</li>
+            <li>Co-designed an emissions management platform end to end with a cross-functional team, from discovery to MVP and beyond. <strong class="hl">Expected customer onboarding time dropped from months to days.</strong> Owned design solo through a team transition and championed its value in a development-heavy team new to designers.</li>
+            <li>Led 5+ customer research sessions and started bi-weekly client calls. After launch, shadowed live onboarding to drive improvements: unified data entry, end-to-end journeys, AI-assisted master data onboarding.</li>
+            <li>Built an AI accessibility toolkit as a personal initiative: Claude-powered scripts scan a repo for issues, propose fixes and open pull requests for approved ones. Authored a unified accessibility settings proposal that inherits system and browser preferences.</li>
+            <li>Rebuilt the full front end and main happy paths of a vibe-coded internal app in one week with Claude Code, using the design system's web components and meeting accessibility standards. <strong class="hl">This would previously have taken months.</strong></li>
           </ul>
-          <div class="more open" id="more-ifs"><div class="more-in">
-            <div class="sub">Accessibility</div>
-            
-            <ul>
-              <li>As a personal initiative, built an AI accessibility toolkit: Claude-powered scripts scan a repo for issues, then propose fixes and open pull requests for approved ones.</li>
-              <li>Authored a unified accessibility settings proposal (currently under review) that inherits system and browser preferences and adds personalization.</li>
-            </ul>
-            <div class="sub">One-week redesign</div>
-            <ul>
-              <li>Rebuilt the full front end and main happy paths of a vibe-coded internal app in one week using Claude Code, with the design system's web components and meeting accessibility standards. Ready for customer presentation. <strong class="hl">This would previously have taken months.</strong></li>
-            </ul>
-          </div></div>
-          <button class="toggle" type="button" aria-expanded="false" aria-controls="more-ifs"><span>Show more</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17 9.17C16.8126 8.98375 16.5592 8.87921 16.295 8.87921C16.0308 8.87921 15.7774 8.98375 15.59 9.17L12 12.71L8.46001 9.17C8.27265 8.98375 8.0192 8.87921 7.75501 8.87921C7.49082 8.87921 7.23737 8.98375 7.05001 9.17C6.95628 9.26297 6.88189 9.37357 6.83112 9.49543C6.78035 9.61729 6.75421 9.74799 6.75421 9.88C6.75421 10.012 6.78035 10.1427 6.83112 10.2646C6.88189 10.3864 6.95628 10.497 7.05001 10.59L11.29 14.83C11.383 14.9237 11.4936 14.9981 11.6154 15.0489C11.7373 15.0997 11.868 15.1258 12 15.1258C12.132 15.1258 12.2627 15.0997 12.3846 15.0489C12.5064 14.9981 12.617 14.9237 12.71 14.83L17 10.59C17.0937 10.497 17.1681 10.3864 17.2189 10.2646C17.2697 10.1427 17.2958 10.012 17.2958 9.88C17.2958 9.74799 17.2697 9.61729 17.2189 9.49543C17.1681 9.37357 17.0937 9.26297 17 9.17Z" fill="currentColor"/></svg></button>
         </div>
       </article>
 
@@ -1116,18 +1103,11 @@ h1,h2,h3{font-weight:350;letter-spacing:-0.025em;}
         </div>
         <div class="desc">
           <ul>
-            <li>Worked on the company website, including the homepage, and took part in its full redesign based on user research.</li>
-            <li>Contributed ongoing improvements and new features to the claim submission funnel.</li>
-            <li>Validated designs with unmoderated user tests alongside the research team, then consistently A/B tested all proposed solutions and shipped the winners. <strong class="hl">Conversion reached record highs</strong> on both the website and the funnel.</li>
-            <li>Worked on the AirHelp+ premium subscription, improving customer acquisition and retention through research-driven solutions. Redesigned the rejection experience to educate users on why their claim was declined and offer a personalised upsell in place of a generic one, a solution still in use today.</li>
-            <li>Helped educate the team on, and replace, dark patterns (hidden fees, fake urgency, inflated payout estimates) with fee transparency and trust-building design.</li>
+            <li>Redesigned the website, including the homepage, and improved the claim funnel. Validated designs with unmoderated tests, A/B tested every change and shipped the winners. <strong class="hl">Conversion reached record highs on both the website and the funnel.</strong></li>
+            <li>Improved acquisition and retention for the AirHelp+ subscription. Redesigned the claim-rejection experience to explain why a claim was declined and offer a personalised upsell, <strong class="hl">still in use today</strong>.</li>
+            <li>Helped replace dark patterns (hidden fees, fake urgency, inflated payout estimates) with fee transparency and trust-building design.</li>
+            <li>As part of the Diversity &amp; Inclusion team, brought the company's first representation to Gdansk Pride and organised the first internal Pride celebration.</li>
           </ul>
-          <div class="more open" id="more-airhelp"><div class="more-in">
-            <ul>
-              <li>As part of the Diversity &amp; Inclusion team, brought the company's first-ever representation to Gdansk Pride and organised the first internal Pride celebration at company retreats.</li>
-            </ul>
-          </div></div>
-          <button class="toggle" type="button" aria-expanded="false" aria-controls="more-airhelp"><span>Show more</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17 9.17C16.8126 8.98375 16.5592 8.87921 16.295 8.87921C16.0308 8.87921 15.7774 8.98375 15.59 9.17L12 12.71L8.46001 9.17C8.27265 8.98375 8.0192 8.87921 7.75501 8.87921C7.49082 8.87921 7.23737 8.98375 7.05001 9.17C6.95628 9.26297 6.88189 9.37357 6.83112 9.49543C6.78035 9.61729 6.75421 9.74799 6.75421 9.88C6.75421 10.012 6.78035 10.1427 6.83112 10.2646C6.88189 10.3864 6.95628 10.497 7.05001 10.59L11.29 14.83C11.383 14.9237 11.4936 14.9981 11.6154 15.0489C11.7373 15.0997 11.868 15.1258 12 15.1258C12.132 15.1258 12.2627 15.0997 12.3846 15.0489C12.5064 14.9981 12.617 14.9237 12.71 14.83L17 10.59C17.0937 10.497 17.1681 10.3864 17.2189 10.2646C17.2697 10.1427 17.2958 10.012 17.2958 9.88C17.2958 9.74799 17.2697 9.61729 17.2189 9.49543C17.1681 9.37357 17.0937 9.26297 17 9.17Z" fill="currentColor"/></svg></button>
         </div>
       </article>
 
@@ -1139,9 +1119,8 @@ h1,h2,h3{font-weight:350;letter-spacing:-0.025em;}
         </div>
         <div class="desc">
           <ul>
-            <li>Spent a year embedded with the UBS design team, improving their web and mobile platforms using UBS's web and mobile design systems.</li>
-            <li>Co-designed and launched Investment Insights with a UBS designer, a feature in the UBS web and mobile apps. It personalizes investment suggestions from each client's portfolio, streamlines buying stocks and bonds, and shows live investment dashboards.</li>
-            <li>Led an end-to-end website redesign for another client as the only designer, including a component handover file for developers.</li>
+            <li>Spent a year embedded with the UBS design team, improving web and mobile platforms within UBS's design systems. Co-designed and launched Investment Insights, a feature with personalised investment suggestions from each client's portfolio, a streamlined way to buy stocks and bonds, and live investment dashboards.</li>
+            <li>Led an end-to-end website redesign for another client as the only designer, with a component handover file for developers.</li>
           </ul>
         </div>
       </article>
@@ -1155,9 +1134,8 @@ h1,h2,h3{font-weight:350;letter-spacing:-0.025em;}
         </div>
         <div class="desc">
           <ul>
-            <li>Co-designed the GO Navigation mobile app (<strong class="hl">1M+ users at the time</strong>), a leading TomTom product for offline and truck navigation, in a duo with a UX designer. Owned the visual and UI side, through usability testing and developer handoff.</li>
-            <li>Adapted the app for Google's Android Auto early access program, building a Figma design system from Android Auto components so screens could be assembled quickly.</li>
-            <li>Designed a new internal map editor for a large team of cartographers who update maps from satellite imagery. Observed them at work, and ran workshops and usability testing. It built on their previous-generation tool.</li>
+            <li>Co-designed the GO Navigation app (<strong class="hl">1M+ users at the time</strong>) with a UX designer. Owned the UI through usability testing and developer handoff. Adapted the app for Google's Android Auto early access program and created a dedicated design system on Figma.</li>
+            <li>Designed an internal map editor for cartographers, working closely with them through observation, workshops and usability testing to improve on their existing tool.</li>
             <li>Mentored an intern for 3 months, who was then hired as a junior designer.</li>
           </ul>
         </div>
@@ -1397,18 +1375,16 @@ h1,h2,h3{font-weight:350;letter-spacing:-0.025em;}
 
   // Skills: sticky swap. The section stays pinned and the group changes as you scroll.
   var SK = [
-    { t: 'AI & Prototyping', c: ['Claude Code', 'Claude Design', 'Claude skills, plugins and agents', 'MCP (incl. Figma MCP)', 'ChatGPT', 'AI-assisted prototyping', 'AI-assisted research synthesis'] },
-    { t: 'Design', c: ['Product design', 'Interaction design', 'Visual / UI design', 'Information architecture', 'Responsive & mobile-first design', 'Design systems & design tokens', 'Prototyping', 'Design critique & workshop facilitation'] },
-    { t: 'Research & Data', c: ['Moderated interviews', 'Unmoderated testing (UserTesting)', 'A/B testing', 'Google Analytics', 'FullStory'] },
-    { t: 'Accessibility', c: ['WCAG', 'European Accessibility Act', 'Inclusive design'] },
-    { t: 'Engineering & Handoff', c: ['Storybook', 'Git / Bitbucket', 'Developer handoff'] },
-    { t: 'Ways of Working', c: ['Agile', 'Stakeholder management', 'Mentoring', 'Jira', 'Notion', 'Confluence', 'Miro', 'FigJam'] }
+    { t: 'AI & Prototyping', c: ['Claude Code', 'Claude skills & agents', 'MCP', 'ChatGPT', 'Copilot', 'AI prototyping', 'Research synthesis'] },
+    { t: 'Design', c: ['Figma', 'Product design', 'Interaction design', 'UI design', 'Information architecture', 'Responsive design', 'Design systems & tokens'] },
+    { t: 'Research & Accessibility', c: ['Moderated & unmoderated testing', 'UserTesting', 'A/B testing', 'Google Analytics', 'WCAG', 'European Accessibility Act'] },
+    { t: 'Delivery & Collaboration', c: ['Developer handoff', 'Storybook', 'Bitbucket', 'Agile', 'Stakeholder management', 'Mentoring', 'Jira', 'Notion', 'Confluence', 'Miro', 'FigJam'] }
   ];
   function mk(tag, cls, txt){ var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
   function two(n){ return (n < 10 ? '0' : '') + n; }
   (function(){
     var root = document.querySelector('[data-sv="1"]'), inn = mk('div', 's1-in'), left = mk('div', 's1-left'), right = mk('div', 's1-right');
-    var cnt = mk('div', 's1-count', 'Skills  01 / 06'), titles = mk('div', 's1-titles'), dots = mk('div', 's1-dots'), ts = [], ps = [], ds = [];
+    var cnt = mk('div', 's1-count', 'Skills  01 / 04'), titles = mk('div', 's1-titles'), dots = mk('div', 's1-dots'), ts = [], ps = [], ds = [];
     SK.forEach(function(g){
       var t = mk('div', 's1-t', g.t); titles.appendChild(t); ts.push(t);
       var p = mk('div', 's1-p'), u = mk('ul', 'kc');
