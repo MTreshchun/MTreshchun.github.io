@@ -7,11 +7,11 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="robots" content="noindex,nofollow">
 <meta name="description" content="Maryna Treshchun, Senior Product Designer. I believe in accessible, honest design, built together.">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=2">
-<link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png?v=2">
-<link rel="icon" type="image/svg+xml" href="favicon-for-light.svg?v=2" media="(prefers-color-scheme: light)">
-<link rel="icon" type="image/svg+xml" href="favicon-for-dark.svg?v=2" media="(prefers-color-scheme: dark)">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=3">
+<link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png?v=3">
+<link rel="icon" type="image/svg+xml" href="favicon-for-light.svg?v=3" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/svg+xml" href="favicon-for-dark.svg?v=3" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Maryna Treshchun, Senior Product Designer">
 <meta property="og:description" content="I believe in accessible, honest design, built together.">
@@ -422,7 +422,7 @@ document.addEventListener('DOMContentLoaded',function(){document.body.addEventLi
   .stage.soon .build-lead{max-width:600px;}
   .abtn{background:var(--paper-alt);color:var(--ink-soft);border:none;border-radius:6px;padding:6px 12px;font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:background .2s,color .2s;}@media (hover:hover){.abtn:hover{color:var(--ink);background:#d3e2df;}}
   .abtn[aria-pressed="true"]{background:var(--ink);color:var(--paper);}
-  .postit{position:relative;margin:36px auto 0;width:230px;text-align:left;background:#fff0a6;border-radius:2px;padding:18px 18px 16px;rotate:-2deg;box-shadow:0 1px 2px rgba(22,53,42,.07),0 10px 24px rgba(22,53,42,.09);font-size:14px;line-height:1.45;color:#4a4320;z-index:2;transition:box-shadow .3s var(--ease),transform .3s var(--ease);}.postit:focus-within{transform:translateY(-4px);box-shadow:0 2px 4px rgba(22,53,42,.07),0 18px 36px rgba(22,53,42,.15);}@media (hover:hover){.postit:hover{transform:translateY(-4px);box-shadow:0 2px 4px rgba(22,53,42,.07),0 18px 36px rgba(22,53,42,.15);}}
+  .postit{position:relative;margin:36px auto 0;width:304px;text-align:left;background:#fff0a6;border-radius:2px;padding:18px 18px 16px;rotate:-2deg;box-shadow:0 1px 2px rgba(22,53,42,.07),0 10px 24px rgba(22,53,42,.09);font-size:14px;line-height:1.45;color:#4a4320;z-index:2;transition:box-shadow .3s var(--ease),transform .3s var(--ease);}.postit:focus-within{transform:translateY(-4px);box-shadow:0 2px 4px rgba(22,53,42,.07),0 18px 36px rgba(22,53,42,.15);}@media (hover:hover){.postit:hover{transform:translateY(-4px);box-shadow:0 2px 4px rgba(22,53,42,.07),0 18px 36px rgba(22,53,42,.15);}}
   .postit .ext svg{transition:transform .25s var(--ease);}.postit .ext:focus-visible svg{transform:translate(3px,-3px);}@media (hover:hover){.postit .ext:hover svg{transform:translate(3px,-3px);}}
   .postit p{margin:0 0 10px;color:#4a4320;}
   .postit .ext{color:#2f2a10;border-bottom-color:#8a7d2a;font-size:14px;font-weight:500;}
@@ -451,7 +451,7 @@ document.addEventListener('DOMContentLoaded',function(){document.body.addEventLi
   [data-anim] .a-t{color:var(--ink)!important;}
   [data-anim] .a-l{color:var(--ink-soft)!important;}
   @media (prefers-reduced-motion:reduce){[data-anim] .a-t,[data-anim] .a-l{animation:none!important;color:inherit;-webkit-text-fill-color:currentColor;opacity:1;}}
-  @media (max-width:820px){.stage.soon{padding-bottom:40px;} .stage.soon .big{white-space:normal;} .postit{width:100%;max-width:260px;}}
+  @media (max-width:820px){.stage.soon{padding-bottom:40px;} .stage.soon .big{white-space:normal;} .postit{width:100%;max-width:304px;} .postit p{font-size:13px;}}
 
 
   
@@ -1048,6 +1048,7 @@ h1,h2,h3{font-weight:350;letter-spacing:-0.025em;}
 #education .edu > h2{grid-column:1;grid-row:2;}
 #education .edu > p{grid-column:1;grid-row:3;}
 #education .edu > #diploma{grid-column:2;grid-row:2;margin-top:0;white-space:nowrap;font-size:15px;justify-self:end;}
+#education .edu > #diploma.pending{border-bottom:0;text-decoration:none;color:var(--ink-soft);cursor:default;font-style:normal;}
 </style>
 
 <a class="skip" href="#experience">Skip to content</a>
@@ -1149,7 +1150,7 @@ h1,h2,h3{font-weight:350;letter-spacing:-0.025em;}
   <div class="wrap">
     <div class="stage cen soon" data-anim="1">
       <div class="cbg dotsbg" aria-hidden="true"></div>
-      <div class="cen-in"><h2 class="big a-t">New portfolio is on its way.</h2><p class="build-lead a-l">I'm actively bringing it up to speed with my current experience and adding new case studies from my past positions.</p><div class="bld" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><div class="dim" aria-hidden="true"><b></b><u></u><b></b></div><aside class="postit" aria-label="Note about the older portfolio"><p>Until the new one is ready, you can look at the older version.</p><a class="ext" data-link="oldPortfolio" href="#" target="_blank" rel="noopener" hidden>View older portfolio <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a><span data-link-fallback="oldPortfolio">The link to the older version is on my CV.</span></aside></div>
+      <div class="cen-in"><h2 class="big a-t">New portfolio is on its way.</h2><p class="build-lead a-l">I'm actively bringing it up to speed with my current experience and adding new case studies from my past positions.</p><div class="bld" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><div class="dim" aria-hidden="true"><b></b><u></u><b></b></div><aside class="postit" aria-label="Note about the older portfolio"><p>Until the new one is ready,<br>you can look at the older version.</p><a class="ext" data-link="oldPortfolio" href="#" target="_blank" rel="noopener" hidden>View older portfolio <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a><span data-link-fallback="oldPortfolio">The link to the older version is on my CV.</span></aside></div>
       
     </div>
   </div>
@@ -1167,7 +1168,7 @@ h1,h2,h3{font-weight:350;letter-spacing:-0.025em;}
       <div class="section-label">Education</div>
       <h2>Bachelor of Graphic Design</h2>
       <p>School of Computer Science and Skills</p>
-      <a class="ext lk" id="diploma" href="#">View diploma <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+      <span class="ext lk pending" id="diploma" aria-disabled="true">Available on request</span>
       <div class="sub-label">Courses</div>
       <ul class="courses" id="courses"></ul>
     </div>
@@ -1445,14 +1446,11 @@ h1,h2,h3{font-weight:350;letter-spacing:-0.025em;}
   function cap(key, withText){ var c = el('div', 'og-cap'); c.appendChild(el('b', null, OW[key].t)); if (withText !== false) c.appendChild(el('span', null, OW[key].c)); return c; }
   document.documentElement.lang = 'en';
   // Courses: fill in name, issuer and certificate URL. Empty URLs hide the link.
-  var DIPLOMA = 'https://drive.google.com/file/d/1IdDv5RlkaZ61tgsbzyAQISplTuwtlN9K/view?usp=sharing';
   var COURSES = [
     { t: 'Foundations of User Experience (UX) Design', by: 'Google', url: 'https://drive.google.com/file/d/10tULx3gv-uClQdK1bG_k_tbkcbOB7jfT/view?usp=sharing' },
     { t: 'Introduction to Psychology', by: 'Yale University', url: 'https://drive.google.com/file/d/1cQ6KBoyJwz4ETOs7XGzR7RX7l3SSKMw0/view?usp=sharing' }
   ];
   (function(){
-    var d = document.getElementById('diploma');
-    if (DIPLOMA) { d.href = DIPLOMA; d.target = '_blank'; d.rel = 'noopener'; } else { d.classList.add('pending'); d.setAttribute('aria-disabled', 'true'); d.addEventListener('click', function(e){ e.preventDefault(); }); }
     var ul = document.getElementById('courses'); if (!ul) return;
     COURSES.forEach(function(c){
       var li = el('li'), t = el('div'); t.appendChild(document.createTextNode(c.t)); t.appendChild(el('small', null, c.by)); li.appendChild(t);
